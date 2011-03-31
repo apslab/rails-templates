@@ -1,0 +1,7 @@
+- content_for(:title) do
+  %h1= t('scaffold.actions.new', :item => <%= singular_table_name.camelize %>.human_name).titlecase
+
+= render 'form'
+
+= link_to t('scaffold.actions.back'), <%= index_helper %>_path
+

@@ -1,0 +1,15 @@
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), <%= singular_table_name.camelize %>.human_name].join(' ')).titlecase
+
+<% for attribute in attributes -%>
+%p
+  %b
+    = <%= singular_table_name.camelize %>.human_attribute_name('<%= attribute.name %>')
+    :
+  = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+
+= link_to t('scaffold.actions.edit').titlecase, edit_<%= singular_table_name %>_path(@<%= singular_table_name %>)
+\|
+= link_to t('scaffold.actions.back').titlecase, <%= index_helper %>_path
+

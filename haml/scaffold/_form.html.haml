@@ -1,0 +1,18 @@
+= form_for @<%= singular_table_name %> do |f|
+  -if @<%= singular_table_name %>.errors.any?
+    #error_explanation
+      %h2= t('activerecord.errors.template.header', :model => <%= singular_table_name.camelize %>.human_name, :count => @<%= singular_table_name %>.errors.count)
+      %h2= t('activerecord.errors.template.body')
+
+      %ul
+        - @<%= singular_table_name %>.errors.full_messages.each do |msg|
+          %li= msg
+
+<% for attribute in attributes -%>
+  .field
+    = f.label :<%= attribute.name %>
+    = f.<%= attribute.field_type %> :<%= attribute.name %>
+<% end -%>
+  .actions
+    = f.submit t('scaffold.actions.save').titlecase
+
