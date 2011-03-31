@@ -1,23 +1,25 @@
 <%-
 =begin
-controller.rb - Template for overriding scaffold's controller with improves and rules of AP System
-Copyright (C) 2011 - Luis Petek <lmpetek@gmail.com>, Maximiliano Dello Russo <maxidr@gmail.com> and Luis E. Guardiola <lguardiola@gmail.com>
 
-controller.rb is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
+  This file is part of rails-templates (https://github.com/apslab/rails-templates) - application template and various custom templates to overrides generals rails generators
+  Copyright (C) 2011 - Luis Petek <lmpetek@gmail.com>, Maximiliano Dello Russo <maxidr@gmail.com> and Luis E. Guardiola <lguardiola@gmail.com>
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+  controller.rb is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as
+  published by the Free Software Foundation, either version 3 of the
+  License, or (at your option) any later version.
 
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
 
-Usage:
-  put this file into lib/templates/rails/scaffold_controller/controller.rb
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  Usage:
+    put this file into lib/templates/rails/scaffold_controller/controller.rb
+
 =end
 -%>
 class <%= controller_class_name %>Controller < ApplicationController
