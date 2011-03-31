@@ -1,7 +1,7 @@
-# ap-system.rb - Rails Application Template with AP System rules
+# This file is part of rails-templates (https://github.com/apslab/rails-templates) - application template and various custom templates to overrides generals rails generators
 # Copyright (C) 2011 - Luis Petek <lmpetek@gmail.com>, Maximiliano Dello Russo <maxidr@gmail.com> and Luis E. Guardiola <lguardiola@gmail.com>
 #
-# ap-system.rb is free software: you can redistribute it and/or modify
+# rails-templates is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
@@ -16,21 +16,17 @@
 
 #
 # Usage:
-#   rails new myapp -T -J -m https://gist.github.com/raw/7a589bdb00721f5b339f/ap-system.rb
+#   rails new myapp -T -J -m https://github.com/apslab/rails-templates/raw/master/apslabs.rb
 #
 
 # custom generators and templates overrides
 say_status("fetching", "custom generators and templates overrides", :green)
 inside('lib') do
-  run('git clone git://github.com/lguardiola/generators.git')
+  run('git clone git://github.com/apslab/generators.git')
   remove_dir('generators/.git')
-end
-empty_directory('lib/templates/rails/scaffold_controller')
-get('https://gist.github.com/raw/7a589bdb00721f5b339f/controller.rb', 'lib/templates/rails/scaffold_controller/controller.rb')
 
-empty_directory('lib/templates/haml/scaffold')
-%w(edit.html.haml  _form.html.haml  index.html.haml  new.html.haml  show.html.haml).each do |template|
-  get("https://gist.github.com/raw/7a589bdb00721f5b339f/#{template}", "lib/templates/haml/scaffold/#{template}")
+  run('git clone -b templates git://github.com/apslab/rails-templates.git templates')
+  remove_dir('templates/.git')
 end
 
 # design
@@ -53,7 +49,7 @@ gem 'compass', :group => [:development, :test]
 
 say_status("design", "replace erb template engine system to haml", :green)
 remove_file('app/views/layouts/application.html.erb')
-get('https://gist.github.com/raw/7a589bdb00721f5b339f/application.html.haml', 'app/views/layouts/application.html.haml')
+get('https://github.com/apslab/rails-templates/raw/assets/views/layouts/application.html.haml', 'app/views/layouts/application.html.haml')
 say_status("design", "add shared view folders for common partials", :green)
 empty_directory_with_gitkeep('app/views/shared')
 
