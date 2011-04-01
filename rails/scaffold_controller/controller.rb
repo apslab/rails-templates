@@ -64,7 +64,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # POST <%= route_url %>.xml
   def create
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "params[:#{singular_table_name}]") %>
-    flash[:notice] = t('scaffold.notice.created', :item => <%= human_name %>) if @<%= orm_instance.save %>
+    flash[:notice] = t('scaffold.notice.created', :item => <%= singular_table_name.camelize %>.human_name) if @<%= orm_instance.save %>
     respond_with(@<%= singular_table_name %>)
   end
 
@@ -72,7 +72,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # PUT <%= route_url %>/1.json
   # PUT <%= route_url %>/1.xml
   def update
-    flash[:notice] = t('scaffold.notice.updated', :item => <%= human_name %>) if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
+    flash[:notice] = t('scaffold.notice.updated', :item => <%= singular_table_name.camelize %>.human_name) if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
     respond_with(@<%= singular_table_name %>)
   end
 
@@ -80,7 +80,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # DELETE <%= route_url %>/1.json
   # DELETE <%= route_url %>/1.xml
   def destroy
-    flash[:notice] = 'Article was successfully destroyed.' if @<%= orm_instance.destroy %>
+    flash[:notice] = t('scaffold.notice.destroyed', :item => <%= singular_table_name.camelize %>.human_name) if @<%= orm_instance.destroy %>
     respond_with(@<%= singular_table_name %>)
   end
 
