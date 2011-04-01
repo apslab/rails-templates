@@ -19,7 +19,28 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
     %meta{:content => I18n.locale, :name => "language"}/
-    %title= strip_tags([t(:title), content_for?(:title) ? yield(:title) : t(:slogan)].join(' :: '))
+    %meta{:charset => "utf-8" }/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon" }/
+    -#
+      Always force latest IE rendering engine (even in intranet) & Chrome Frame
+      Remove this if you use the .htaccess
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible" }/
+    -# Mobile viewport optimized: j.mp/bplateviewport
+    %meta{:content => "width=device-width; initial-scale=1.0", :name => "viewport" }/
+    -#
+      Mobile icon dimensions should be 57x57 pixels.
+      If the icon is a different size it will be scaled and cropped to fit.
+    %link{:href => "#{image_path('icons/apple-touch-icon.png')}", :rel => "apple-touch-icon" }/
+    -# Mobile startup/slapsh image should be 320px x 460px startup screen for full screen apps."
+    %link{:href => "#{image_path('icons/apple-touch-startup-image.png')}", :rel => 'apple-touch-startup-image' }/
+    -#
+      The next step is to remove the default Apple toolbars and menu bars (full-screen mode).
+      These are the ones which show the web address and search at the top and which show the bookmark, back and forwards buttons at the bottom.
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    = title_tag(t(:title))
+    = description_tag(t(:description))
+    = keywords_tag(t(:keywords))
+    = copyright_tag(t(:copyright, :year => Time.now.year))
     = stylesheet_link_tag(:screen, :media => "screen, projection")
     = stylesheet_link_tag(:print, :media => :print)
     /[if lt IE 8]
@@ -31,10 +52,11 @@
     #content
       #header
         = yield(:title)
-      #notification
+      #flash
         - flash.each do |type, message|
           %p.flash{:class => type.to_s}= message
       #main
         = yield
-    .copyright= t(:copyright, :year => Time.now.year)
+      #footer
+        .copyright= t(:copyright, :year => Time.now.year)
 
