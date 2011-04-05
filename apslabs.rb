@@ -102,9 +102,9 @@ end
 
 say_status("jQuery", "config javascript expansions :defaults to jQuery", :green)
 %w(development test).each do |non_production_enviroment|
-  inject_into_file "config/environments/#{non_production_enviroment}.rb", "\n\n  config.action_view.javascript_expansions[:defaults] = %w(#{jquery_normal_assets}) + %w(rails)", :after => /Myapp::Application\.configure do/, :verbose => false
+  inject_into_file "config/environments/#{non_production_enviroment}.rb", "\n\n  config.action_view.javascript_expansions[:defaults] = %w(#{jquery_normal_assets}) + %w(rails)", :after => /^.*::Application\.configure do/, :verbose => false
 end
-inject_into_file 'config/environments/production.rb', "\n\n  config.action_view.javascript_expansions[:defaults] = %w(#{jquery_minify_assets}) + %w(rails)", :after => /Myapp::Application\.configure do/, :verbose => false
+inject_into_file 'config/environments/production.rb', "\n\n  config.action_view.javascript_expansions[:defaults] = %w(#{jquery_minify_assets}) + %w(rails)", :after => /^.*::Application\.configure do/, :verbose => false
 
 # locales
 empty_directory_with_gitkeep('config/locales/addons')
@@ -223,13 +223,15 @@ if yes?('would you like to use heroku?')
   heroku_custom_domain = [heroku_app_name, heroku_base_domain].join('.') if heroku_custom_domain.blank?
   run("heroku create #{heroku_app_name}")
 
-  run('heroku addons:add logging:expanded')
+  run('heroku addons:update logging:expanded')
   run('heroku addons:add sendgrid:free')
 
   run('heroku addons:add memcache:5mb')
   gem('dalli')
   run('bundle install')
-  application do
+  inject_into_file('config/environments/production.rb',
+                  :after => /^.*::Application\.configure do/,
+                  :verbose => false) do
     %Q(
       # turn on memcache with dalli for heroku
       config.generators do |generator|
