@@ -23,10 +23,13 @@ if yes?('would you like to use heroku?(default: no)')
     )
   end
 
+  git :add => ' .'
+  git :commit => ' -m "add final bundle.lock for heroku with caching gems and configs!"'
+
   run('heroku addons:add custom_domains:basic')
   run("heroku domains:add #{heroku_custom_domain}")
 
-  collaborator_emails = ask?('please enter a space separated collaborator\'s emails list, if you need them:')
+  collaborator_emails = ask('please enter a space separated collaborator\'s emails list, if you need them:')
   collaborator_emails.split.compact.each do |collaborator_email|
     run("heroku sharing:add #{collaborator_email}")
   end
