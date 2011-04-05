@@ -142,8 +142,6 @@ en:
   )
 end
 
-run('mv config/locales/simple_form.en.yml config/locales/addons/simple_form.en.yml')
-
 unless no?('enable suppor for spanish locale?(default: yes)')
   application do
     %Q(
@@ -181,33 +179,36 @@ unless no?('enable suppor for spanish locale?(default: yes)')
       save: guardar
     )
   end
-  create_file('config/locales/addons/simple_form.es-AR.yml') do
-    %Q(
-'es-AR':
-  simple_form:
-    yes: 'Si'
-    no: 'No'
-    required:
-      text: 'requerido'
-      mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
-    error_notification:
-      default_message: "Se encontraron algunos errores, por favor revise lo siguiente:"
-    # Labels and hints examples
-    #labels:
-    #   password: 'Clave'
-    #   user:
-    #     new:
-    #       email: 'E-mail para ingresar.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   username: 'Nombre de usuario para ingresar.'
-    #   password: 'Por favor, sin caracteres especiales.'
-    )
-  end if File.exist?('config/locales/addons/simple_form.en.yml')
+  if File.exist?('config/locales/simple_form.en.yml')
+    run('mv config/locales/simple_form.en.yml config/locales/addons/simple_form.en.yml')
+    create_file('config/locales/addons/simple_form.es-AR.yml') do
+      %Q(
+  'es-AR':
+    simple_form:
+      yes: 'Si'
+      no: 'No'
+      required:
+        text: 'requerido'
+        mark: '*'
+        # You can uncomment the line below if you need to overwrite the whole required html.
+        # When using html, text and mark won't be used.
+        # html: '<abbr title="required">*</abbr>'
+      error_notification:
+        default_message: "Se encontraron algunos errores, por favor revise lo siguiente:"
+      # Labels and hints examples
+      #  labels:
+      #    password: 'Clave'
+      #    user:
+      #      new:
+      #        email: 'E-mail para ingresar.'
+      #      edit:
+      #        email: 'E-mail.'
+      #  hints:
+      #    username: 'Nombre de usuario para ingresar.'
+      #    password: 'Por favor, sin caracteres especiales.'
+      )
+    end
+  end
 end
 
 # git
