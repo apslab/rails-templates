@@ -49,14 +49,16 @@
     = yield(:head)
     = csrf_meta_tag
   %body
-    #content
+    #container
       #header
-        = yield(:title)
-      #flash
-        - flash.each do |type, message|
-          %p.flash{:class => type.to_s}= message
-      #main
+        = content_for?(:header) ? yield(:header) : render('shared/header')
+      #sidebar
+        = content_for?(:sidebar) ? yield(:sidebar) : render('shared/sidebar')
+      #content
+        #flash
+          - flash.each do |type, message|
+            %p.flash{:class => type.to_s}= message
         = yield
       #footer
-        .copyright= t(:copyright, :year => Time.now.year)
+        = content_for?(:footer) ? yield(:footer) : render('shared/footer')
 
