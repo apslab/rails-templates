@@ -1,2 +1,2 @@
-.copyright= t(:copyright, :year => Time.now.year)
+.copyright= content_for?(:copyright) ? yield(:copyright) : t(:copyright, :year => Time.now.year)
 
