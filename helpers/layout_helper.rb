@@ -7,7 +7,7 @@ module LayoutHelper
   def title_tag(*args)
     options = args.extract_options!
     content = @content_for_title || args.first
-    content_tag(:title, [options[:prefix], strip_tags(content), options[:suffix]].compact.join
+    content_tag(:title, [options[:prefix], strip_tags(content), options[:suffix]].compact.join)
   end
 
   def description(string)
