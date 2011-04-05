@@ -70,7 +70,7 @@ production:
     s3_key='PLEASE REPLACE ME' if s3_key.blank?
     s3_secret=ask('please enter Amazon S3 secret:')
     s3_secret='PLEASE REPLACE ME' if s3_secret.blank?
-    run("heroku config:add S3_KEY=#{s3_key} S3_SECRET=#{s3_secret}")
+    run("heroku config:add S3_KEY='#{s3_key}' S3_SECRET='#{s3_secret}'")
 
     git :add => ' config/amazon_s3.yml'
     git :commit => ' -m "add Amazon S3 config example!"'
