@@ -1,10 +1,8 @@
 if yes?('would you like to use heroku?(default: no)')
   heroku_app_name = File.basename(destination_root)
-  heroku_default_cutom_domain = 'apslabs.com.ar'
-  heroku_suggest_custom_domain = [heroku_app_name, heroku_default_cutom_domain].join('.')
-  heroku_custom_domain = ask("what custom domain would you like to run this application? (default: #{heroku_suggest_custom_domain})")
-  heroku_custom_domain = heroku_suggest_custom_domain if heroku_custom_domain.blank?
-  run("heroku create #{heroku_app_name}")
+  until run("heroku create #{heroku_app_name}")
+    heroku_app_name = ask("#{heroku_app_name} is taken!, please enter another name for the application:")
+  end
 
   run('heroku addons:update logging:expanded')
   run('heroku addons:add sendgrid:free')
@@ -27,6 +25,10 @@ if yes?('would you like to use heroku?(default: no)')
   git :commit => ' -m "add final bundle.lock for heroku with caching gems and configs!"'
 
   run('heroku addons:add custom_domains:basic')
+  heroku_default_cutom_domain = 'apslabs.com.ar'
+  heroku_suggest_custom_domain = [heroku_app_name, heroku_default_cutom_domain].join('.')
+  heroku_custom_domain = ask("what custom domain would you like to run this application? (default: #{heroku_suggest_custom_domain})")
+  heroku_custom_domain = heroku_suggest_custom_domain if heroku_custom_domain.blank?
   run("heroku domains:add #{heroku_custom_domain}")
 
   collaborator_emails = ask('please enter a space separated collaborator\'s emails list, if you need them:')
