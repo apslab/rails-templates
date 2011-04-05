@@ -35,7 +35,7 @@ get 'https://github.com/rails/jquery-ujs/raw/master/src/rails.js', 'public/javas
 jquery_normal_assets = 'https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js'
 jquery_minify_assets = 'https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'
 
-if yes?('Would you like to install Jquery UI?')
+if yes?('Would you like to install Jquery UI?(default: no)')
   jquery_normal_assets << ' https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js'
   jquery_minify_assets << ' https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js'
 end
